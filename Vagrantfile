@@ -19,6 +19,8 @@ Vagrant.configure("2") do |config|
     cfg.vm.provision "shell", inline: <<-SCRIPT
       yum install epel-release -y
       yum install vim git tree wget -y
+      sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+      systemctl restart sshd
     SCRIPT
 
     # install docker
